@@ -128,6 +128,16 @@ public class GamepadOpMode extends LinearOpMode {
             else {
                 shooter.setPower(0d);
             }
+            //region right_trigger
+
+            if (gamepad1.right_trigger > 0d || gamepad2.right_trigger > 0d) {
+                double shooterVelocity = Math.max(gamepad1.right_trigger, gamepad2.right_trigger) * 2200d;
+                shooter.setVelocity(shooterVelocity);
+                intake.setPower(0d);
+            }
+            else {
+                shooter.setPower(0d);
+            }
             //endregion
 
             //region drivetrain control
