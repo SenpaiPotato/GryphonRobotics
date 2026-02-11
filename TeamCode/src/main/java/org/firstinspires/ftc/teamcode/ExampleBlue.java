@@ -3,9 +3,9 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name = "Example", preselectTeleOp = "Gamepad")
+@Autonomous(name = "ExampleBlue", preselectTeleOp = "Gamepad")
 //@Disabled
-public class Example extends LinearOpMode {
+public class ExampleBlue extends LinearOpMode {
     final protected Robot robot = new Robot();
     protected RobotDriver robotDriver;
 
@@ -30,7 +30,7 @@ public class Example extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         // Abort this loop is started or stopped.
         setupAndWait();
-
+        sleep(25000);
         robotDriver.gyroDrive(0.2d, 24d, 0d, 10d, null);
         sleep(1000);
         robotDriver.gyroTurn(0.2d, 90d, 5d);

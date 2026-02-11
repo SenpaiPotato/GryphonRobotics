@@ -58,8 +58,9 @@ public class GamepadOpMode extends LinearOpMode {
             if (gamepad1.a || gamepad2.a) {
                 if (!a_pressed) {
                     a_pressed = true;
-                    if (shooter.getVelocity() > 1900d) {
-                        // Toggle servo
+                    //check if the flywheel is correct speed
+                    if (shooter.getVelocity() > 1600d) {
+                        // Toggle servo for indexer
                         double servoPosition = gateServoRight.getPosition() == 0d ? 1d : 0d;
                         gateServoLeft.setPosition(1d - servoPosition);
                         gateServoRight.setPosition(servoPosition);
@@ -96,6 +97,7 @@ public class GamepadOpMode extends LinearOpMode {
             if (gamepad1.left_bumper || gamepad2.left_bumper) {
                 if (!lb_pressed) {
                     lb_pressed = true;
+                    //ensure that the shooter is off before allowing intake
                     if (shooter.getVelocity() == 0d) {
                         double intakePower = intake.getPower() > 0d ? 0d : 0.9d;
                         intake.setPower(intakePower);
@@ -131,7 +133,7 @@ public class GamepadOpMode extends LinearOpMode {
             //region right_trigger
 
             if (gamepad1.right_trigger > 0d || gamepad2.right_trigger > 0d) {
-                double shooterVelocity = Math.max(gamepad1.right_trigger, gamepad2.right_trigger) * 2200d;
+                double shooterVelocity = Math.max(gamepad1.right_trigger, gamepad2.right_trigger) * 1700d;
                 shooter.setVelocity(shooterVelocity);
                 intake.setPower(0d);
             }
@@ -170,6 +172,8 @@ public class GamepadOpMode extends LinearOpMode {
 
             double turn = gamepad1.left_stick_x * 0.4d;
             double side = gamepad1.right_stick_x * 0.8d;
+            //ADJUST SPEED HERE??asdf
+
 
             // Send calculated power to wheels
             drive(drive, turn, side);
@@ -185,8 +189,8 @@ public class GamepadOpMode extends LinearOpMode {
         double frontRightPower = drive - turn - side;
         double backRightPower = drive - turn + side;
 
-        double maxPower = 0.6;
-        double maxSpeed = 0.6;
+        double maxPower = 0.8;
+        double maxSpeed = 0.8;
 
         // This is needed to make sure we don't pass > 1.0 to any wheel
         // It allows us to keep all of the motors in proportion to what they should

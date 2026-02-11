@@ -3,9 +3,9 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name = "ExampleGoal", preselectTeleOp = "Gamepad")
+@Autonomous(name = "ExampleGoalRed", preselectTeleOp = "Gamepad")
 //@Disabled
-public class ExampleGoal extends LinearOpMode {
+public class ExampleGoalRed extends LinearOpMode {
     final protected Robot robot = new Robot();
     protected RobotDriver robotDriver;
 
@@ -26,12 +26,13 @@ public class ExampleGoal extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         telemetry.addData("Status", "Initialized");
-
-        // Wait for the game to start (driver presses PLAY)
+// Wait for the game to start (driver presses PLAY)
         // Abort this loop is started or stopped.
         setupAndWait();
         // drive backwards
-        robotDriver.gyroDrive(0.2d, -40d, 0d, 10d, null);
+        sleep(8000);
+        robotDriver.gyroDrive(0.5d, -42d, 0d, 10d, null);
+        robotDriver.gyroTurn(0.2d, -4d , 5d);
         sleep(500);
 
         // intake to secure element
@@ -42,10 +43,10 @@ public class ExampleGoal extends LinearOpMode {
         //spin up shooter
         robot.intake.setPower(0d);
         sleep(500);
-        robot.shooter.setVelocity(2200d);
+        robot.shooter.setVelocity(1700d);
 
         //wait for shooter to spin up
-        while(robot.shooter.getVelocity() < 1900d) {
+        while(robot.shooter.getVelocity() < 1600d) {
             sleep(500);
         }
 
@@ -58,12 +59,40 @@ public class ExampleGoal extends LinearOpMode {
         robot.gateServoRight.setPosition(1d);
 
         // move away from the line
-        robotDriver.gyroTurn(0.2d, 85d, 5d);
+        robotDriver.gyroTurn(0.2d, -30d, 5d);
+        robotDriver.gyroSlide(0.5d, -20d, -35d, 5d, null);
         sleep(500);
         robot.intake.setPower(0.9d);
-        robotDriver.gyroDrive(0.2d, 25d, 90d, 5d, null);
+        robotDriver.gyroDrive(0.5d, 20d, -35d, 5d, null);
         sleep(500);
         robot.intake.setPower(0d);
+        robotDriver.gyroDrive(0.5d, -25d, -35d, 5d, null);
+
+        robotDriver.gyroTurn(0.2d, 5d, 5d);
+        robotDriver.gyroDrive(0.5d, 17d, 5d, 5d, null);
+
+
+        robot.intake.setPower(0.9d);
+        sleep(500);
+        robot.intake.setPower(0d);
+        robot.shooter.setVelocity(1700d);
+
+        //wait for shooter to spin up
+        while(robot.shooter.getVelocity() < 1600d) {
+            sleep(500);
+        }
+
+        //release element
+        robot.gateServoLeft.setPosition(1d);
+        robot.gateServoRight.setPosition(0d);
+        sleep(500);
+        robot.shooter.setPower(0d);
+        robot.gateServoLeft.setPosition(0d);
+        robot.gateServoRight.setPosition(1d);
+        robotDriver.gyroSlide(0.5d, -20d, 35d, 5d, null);
+
+
+
 
 
 
